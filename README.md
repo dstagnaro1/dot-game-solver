@@ -17,7 +17,7 @@ Game is by [@Ouzzgame](https://twitter.com/OuzzGame)
    
    answers is the grid where the results will be. answers is a M+1 x M+1 sized 2d array. each data touches 4 answers. the relationship between data and answers have a upper left, upper right, bottom right and bottom left answer. 
 
-1.The upper left answer is the row, col for the data. 
-2.The upper right answer is the row+1, col for the data.
-3.The bottom right answer is the row+1, col+1 for the data. 
-4.The bottom left answer is the row, col+1 for the data.
+1. The upper left answer is the row, col for the data. 
+2. The upper right answer is the row+1, col for the data.
+3. The bottom right answer is the row+1, col+1 for the data. 
+4. The bottom left answer is the row, col+1 for the data.
