@@ -6,6 +6,14 @@ class Matrix:
 		self.answers = answers
 
 	def check_if_complete(self):
+		unknown = len(self.answers[0])**2
+
+		for row in self.answers:
+			unknown -= row.count(0)
+			unknown -= row.count(1)
+
+		print(f"There are {unknown} unknown squares remaining")
+
 		for row in self.answers:
 			if -1 not in row:
 				return True
@@ -21,20 +29,25 @@ class Matrix:
 		neighbors = []
 		# above neighbor:
 		if col > 0:
-			neighbors.append([row, col-1])
+			neighbors.append([col-1, row])
 
 		# right neighbor
 		if row < len(self.data[0])-1:
-			neighbors.append([row+1, col])
+			neighbors.append([col, row+1])
 		
 		# below neighbor:
 		if col < len(self.data[0])-1:
-			neighbors.append([row, col+1])
+			neighbors.append([col+1, row])
 
 		# left neighbor
 		if row > 0:
-			neighbors.append([row-1, col])
+			neighbors.append([col, row-1])
 		return neighbors
+
+	def return_data_corners(self, row, col):
+		pass
+
+
 
 	def return_answer_neighbors(self):
 		pass
@@ -85,6 +98,7 @@ def generate_Matrix(box):
 
 	# takes in string, outputs 2d list
 	square = [[int(box[row*side + col]) for col in range(side)] for row in range(side)]
+	
 	for row in square:
 		print(row)
 
@@ -132,9 +146,8 @@ def verify_input(box):
 	return True
 
 correct_input = False
-test_inputs = ["0134123323332334", "1023013313443443", "3211211221231123", "1232222133212221",
-"211012111", "311421320", "312212211", "1022", "2201", "3422"]
-
+test_inputs = ["0134123323332334", "1023013313443443", "3211211221231123", "1232222133212221", "211012111", "311421320", "312212211", "1022", "2201", "3422"]
+#test_inputs = ["abcdefghijklmnop"]
 
 '''
 while not correct_input:
@@ -149,16 +162,14 @@ while not correct_input:
 '''
 
 #box = test_inputs[ri(0,len(test_inputs)-1)]
-box = test_inputs[1]
+box = test_inputs[0]
 
 box = generate_Matrix(box)
 box.fill_0_and_4()
 
 
-nbrs = box.return_data_neighbors(0,1)
-for indx in nbrs:
-	print(indx)
-	# print(box.data[indx])
+neighbrs = box.return_data_neighbors(2,1)
+for indx in neighbrs:
 	print(box.data[indx[0]][indx[1]])
 
 print(box.check_if_complete())
