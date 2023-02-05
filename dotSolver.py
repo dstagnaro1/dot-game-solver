@@ -204,7 +204,7 @@ while not correct_input:
 '''
 
 # box = test_inputs[ri(0,len(test_inputs)-1)]
-box = test_inputs[-2]
+box = test_inputs[7]
 
 box = generate_Matrix(box)
 box.solve()
