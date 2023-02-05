@@ -19,7 +19,6 @@ class Matrix:
 				return True
 		return False
 
-
 	def return_data_neighbors(self, row, col):
 		# taking the row and column in the matrix, return
 		# locations of the neighbors in the matrix as a list of 
@@ -46,7 +45,6 @@ class Matrix:
 
 	def return_data_corners(self, row, col):
 		pass
-
 
 	def return_answer_neighbors(self):
 		pass
@@ -76,15 +74,29 @@ class Matrix:
 	def fill_02(self):
 		# any 0-2 put two 1's on far side
 
-		neighbrs = box.return_data_neighbors(2,1)
-		for indx in neighbrs:
-			print(box.data[indx[0]][indx[1]])
+		#neighbrs = box.return_data_neighbors(2,1)
+		#for indx in neighbrs:
+		#	print(box.data[indx[0]][indx[1]])
 
-		for row in range(len(self.data[0])):
-			for col in range(len(self.data[0])):
+		for col in range(len(self.data[0])):
+			for row in range(len(self.data[0])):
 				if self.data[row][col] == 0:
-					pass
-
+					print("Found a 0")
+					neighbors = self.return_data_neighbors(row, col)
+					for index in neighbors:
+						if self.data[index[0]][index[1]] == 2:
+							# index[0][index[1]]
+							
+							print("Found a 2 ", end="")
+							if row < index[1]:
+								print("to the right")
+							if row > index[1]:
+								print("to the left")
+							if col < index[0]:
+								print("below")
+							if col > index[0]:
+								print("above")
+							
 		
 		# find 0
 		# find neighbors of 0
@@ -93,7 +105,7 @@ class Matrix:
 		#	in neighbor position
 		# place two dots on far side of 0
 
-		pass
+		
 
 	def fill_13(self):
 		pass
@@ -115,9 +127,7 @@ class Matrix:
 	# any square that is complete now, mark with 0
 	# any square that has no other options fill in 1's
 
-	# get creative
-
-		
+	# get creative	
 		
 # upper left = x, y
 # upper right = x+1, y
@@ -193,8 +203,8 @@ while not correct_input:
         print("Input is incorrect, try again")
 '''
 
-#box = test_inputs[ri(0,len(test_inputs)-1)]
-box = test_inputs[1]
+# box = test_inputs[ri(0,len(test_inputs)-1)]
+box = test_inputs[-2]
 
 box = generate_Matrix(box)
 box.solve()
