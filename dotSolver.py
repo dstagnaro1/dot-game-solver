@@ -48,7 +48,6 @@ class Matrix:
 		pass
 
 
-
 	def return_answer_neighbors(self):
 		pass
 
@@ -74,7 +73,40 @@ class Matrix:
 		for row in self.answers:
 			print(row)
 
-	# any 0-2 put two 1's on far side
+	def fill_02(self):
+		# any 0-2 put two 1's on far side
+
+		neighbrs = box.return_data_neighbors(2,1)
+		for indx in neighbrs:
+			print(box.data[indx[0]][indx[1]])
+
+		for row in range(len(self.data[0])):
+			for col in range(len(self.data[0])):
+				if self.data[row][col] == 0:
+					pass
+
+		
+		# find 0
+		# find neighbors of 0
+		# for all neighbors
+		# if neighbor == 2
+		#	in neighbor position
+		# place two dots on far side of 0
+
+		pass
+
+	def fill_13(self):
+		pass
+
+	def fill_03(self):
+		pass
+
+	def solve(self):
+		self.fill_0_and_4()
+		self.fill_02()
+		self.fill_13()
+		self.fill_03()
+
 	# any 1-3 put two 1's on far side
 	# any 0 -> 3 put three 3's on far side
 
@@ -146,7 +178,7 @@ def verify_input(box):
 	return True
 
 correct_input = False
-test_inputs = ["0134123323332334", "1023013313443443", "3211211221231123", "1232222133212221", "211012111", "311421320", "312212211", "1022", "2201", "3422"]
+test_inputs = ["0134123323332334", "1023013313443443", "3211211221231123","1232222133212221", "211012111", "311421320", "312212211", "1022", "2201", "3422"]
 #test_inputs = ["abcdefghijklmnop"]
 
 '''
@@ -162,15 +194,15 @@ while not correct_input:
 '''
 
 #box = test_inputs[ri(0,len(test_inputs)-1)]
-box = test_inputs[0]
+box = test_inputs[1]
 
 box = generate_Matrix(box)
-box.fill_0_and_4()
+box.solve()
+# box.fill_0_and_4()
 
-
-neighbrs = box.return_data_neighbors(2,1)
-for indx in neighbrs:
-	print(box.data[indx[0]][indx[1]])
+# neighbrs = box.return_data_neighbors(2,1)
+# for indx in neighbrs:
+# 	print(box.data[indx[0]][indx[1]])
 
 print(box.check_if_complete())
 
