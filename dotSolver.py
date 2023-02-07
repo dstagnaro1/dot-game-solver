@@ -26,21 +26,27 @@ class Matrix:
 		# will be 2, 3, or 4 pairs
 
 		neighbors = []
+
+		# these if statements check that its not beyond bounds
+		# it will only give the valid neighbors
+		# so later all neighbors are good, dont need to be checked if in bounds
+
 		# above neighbor:
 		if col > 0:
-			neighbors.append([col-1, row])
+			neighbors.append([row-1, col])
 
 		# right neighbor
 		if row < len(self.data[0])-1:
-			neighbors.append([col, row+1])
+			neighbors.append([row, col+1])
 		
 		# below neighbor:
 		if col < len(self.data[0])-1:
-			neighbors.append([col+1, row])
+			neighbors.append([row+1, col])
 
 		# left neighbor
 		if row > 0:
-			neighbors.append([col, row-1])
+			neighbors.append([row, col-1])
+
 		return neighbors
 
 	def return_data_corners(self, row, col):
@@ -78,24 +84,27 @@ class Matrix:
 		#for indx in neighbrs:
 		#	print(box.data[indx[0]][indx[1]])
 
-		for col in range(len(self.data[0])):
-			for row in range(len(self.data[0])):
+		for row in range(len(self.data[0])):
+			for col in range(len(self.data[0])):
 				if self.data[row][col] == 0:
-					print("Found a 0")
+					print(f"Found a 0, {row}, {col}")
 					neighbors = self.return_data_neighbors(row, col)
+					# neighbors = [[0,2],[1,3],[2,2],[1,1]]
 					for index in neighbors:
+						
+						print(index) #[0, 2]
+						
 						if self.data[index[0]][index[1]] == 2:
-							# index[0][index[1]]
-							
 							print("Found a 2 ", end="")
-							if row < index[1]:
-								print("to the right")
-							if row > index[1]:
-								print("to the left")
-							if col < index[0]:
-								print("below")
-							if col > index[0]:
+
+							if (row-1 == index[0]) and (col == index[1]):
 								print("above")
+							elif (row == index[0]) and (col+1 == index[1]):
+								print("to the right")
+							elif (row+1 == index[0]) and (col == index[1]):
+								print("below")
+							elif (row == index[0]) and (col-1 == index[1]):
+								print("to the left")
 							
 		
 		# find 0
@@ -140,7 +149,8 @@ def generate_Matrix(box):
 
 	# takes in string, outputs 2d list
 	square = [[int(box[row*side + col]) for col in range(side)] for row in range(side)]
-	
+	# square = [[box[row*side + col] for col in range(side)] for row in range(side)]
+
 	for row in square:
 		print(row)
 
@@ -189,7 +199,7 @@ def verify_input(box):
 
 correct_input = False
 test_inputs = ["0134123323332334", "1023013313443443", "3211211221231123","1232222133212221", "211012111", "311421320", "312212211", "1022", "2201", "3422"]
-#test_inputs = ["abcdefghijklmnop"]
+# test_inputs = ["abcdefghijklmnop"]
 
 '''
 while not correct_input:
@@ -203,16 +213,16 @@ while not correct_input:
         print("Input is incorrect, try again")
 '''
 
-# box = test_inputs[ri(0,len(test_inputs)-1)]
-box = test_inputs[7]
+box = test_inputs[ri(0,len(test_inputs)-1)]
+# box = test_inputs[1]
 
 box = generate_Matrix(box)
 box.solve()
 # box.fill_0_and_4()
 
-# neighbrs = box.return_data_neighbors(2,1)
-# for indx in neighbrs:
-# 	print(box.data[indx[0]][indx[1]])
+neighbrs = box.return_data_neighbors(1,2)
+for indx in neighbrs:
+	print(box.data[indx[0]][indx[1]])
 
 print(box.check_if_complete())
 
