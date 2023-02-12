@@ -127,13 +127,21 @@ class Matrix:
 							# for all answers, if answer is -1, set to 1
 
 							if (row-1 == index[0]) and (col == index[1]):
+								self.answers[index[0]][index[1]] = 1
+								self.answers[index[0]+1][index[1]] = 1
 								print("above")
 							elif (row == index[0]) and (col+1 == index[1]):
+								self.answers[index[0]+1][index[1]] = 1
+								self.answers[index[0]+1][index[1]+1] = 1
 								print("to the right")
 							elif (row+1 == index[0]) and (col == index[1]):
+								self.answers[index[0]+1][index[1]+1] = 1
+								self.answers[index[0]][index[1]+1] = 1
 								print("below")
 							elif (row == index[0]) and (col-1 == index[1]):
 								print("to the left")
+								self.answers[index[0]][index[1]+1] = 1
+								self.answers[index[0]][index[1]] = 1
 
 		self.print_answers()
 	
